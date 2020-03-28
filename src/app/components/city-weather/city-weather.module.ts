@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { MainCitiesComponent } from './city-weather-selector/main-cities/main-cities.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [MainCitiesComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [RouterModule, MainCitiesComponent]
 })
-export class CityWeatherModule { }
+export class CityWeatherModule {}
