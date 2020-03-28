@@ -1,0 +1,8 @@
+@import './src/assets/styles/partials/variables';
+
+html,
+body {
+  background: $appBackgroundColour;
+  width: 100%;
+  height: 100%;
+}
