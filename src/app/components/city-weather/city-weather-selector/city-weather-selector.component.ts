@@ -30,6 +30,8 @@ export class CityWeatherSelectorComponent implements OnInit, OnDestroy {
   public getCityFullName = getCityFullName;
 
   ngOnInit() {
+    // Reset search filtering in each load
+    this.weatherService.filteredCities$.next(null);
     this.loadCities();
   }
 
