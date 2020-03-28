@@ -1,0 +1,126 @@
+<div class="page-container" *ngIf="cityFullName">
+  <!-- Title -->
+  <h2 class="city-weather-display-title">
+    Weather Forecast for
+    <span class="city-title">
+      {{ cityFullName }}
+    </span>
+  </h2>
+
+  <div class="top-buttons">
+    <ng-container *ngTemplateOutlet="goHomeButton"></ng-container>
+    <!-- Button Temperature Selector -->
+    <ng-container *ngTemplateOutlet="temperatureToggleButtons"></ng-container>
+  </div>
+  <!-- Forecasts -->
+  <ng-container *ngTemplateOutlet="forecasts"></ng-container>
+</div>
+
+<!--
+  TEMPLATES
+-->
+
+<ng-template #goHomeButton>
+  <button type="button" class="btn btn-light go-home-button" (click)="goHome()">Go home</button>
+</ng-template>
+<ng-template #temperatureToggleButtons>
+  <div class="temperature-unit-buttons">
+    <!-- Farenheit -->
+    <button
+      type="button"
+      class="btn btn-light temperature-unit-btn"
+      (click)="onTemperatureUnitsClick(temperatureUnits.farenheit)"
+      [disabled]="temperatureUnit === temperatureUnits.farenheit"
+    >
+      °{{ temperatureUnits.farenheit }}
+    </button>
+    <!-- Celsius -->
+    <button
+      type="button"
+      class="btn btn-light temperature-unit-btn"
+      (click)="onTemperatureUnitsClick(temperatureUnits.celsius)"
+      [disabled]="temperatureUnit === temperatureUnits.celsius"
+    >
+      °{{ temperatureUnits.celsius }}
+    </button>
+    <!-- Kelvin -->
+    <button
+      type="button"
+      class="btn btn-light temperature-unit-btn"
+      (click)="onTemperatureUnitsClick(temperatureUnits.kelvin)"
+      [disabled]="temperatureUnit === temperatureUnits.kelvin"
+    >
+      °{{ temperatureUnits.kelvin }}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #forecasts>
+  <ng-container *ngFor="let forecast of weeklyForecasts">
+    <div class="card forecast-card">
+      <div class="card-body">
+        <div class="weather-summary">
+          <!-- Summary -->
+          <div class="weather-summary--data">
+            <img class="weather-summary--img" [src]="getForecastIconUrl(forecast.weather[0].icon)" />
+            <span class="weather-summary--temperature"> {{ displayTemperature(forecast.main.temp) }} °{{ temperatureUnit }}</span>
+            <span class="weather-summary--text">{{ forecast.weather[0].description }}</span>
+          </div>
+          <div class="weather-summary--datetime">
+            <span class="date">{{ dateFromNumber(forecast.dt).date | date }} </span>
+            <span class="time text-muted">{{ dateFromNumber(forecast.dt).time }} </span>
+          </div>
+        </div>
+
+        <ng-container *ngTemplateOutlet="extras; context: { forecast: forecast, cityWeather: cityWeather }"></ng-container>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #extras let-forecast="forecast" let-cityWeather="cityWeather">
+  <div class="extras">
+    <!-- Feels Like -->
+    <div class="extra-item feels-like">
+      <span class="text feels-like-text">Feels like</span>
+      <span class="figures feels-like-figures"> {{ displayTemperature(forecast.main.feels_like) }} °{{ temperatureUnit }}</span>
+    </div>
+    <!-- Threshold (minimum & maximum) -->
+    <div class="extra-item threshold">
+      <span class="text threshold-text">Min. / Max.</span>
+      <span class="figures threshold-figures">
+        {{ displayTemperature(forecast.main.temp_min) }} / {{ displayTemperature(forecast.main.temp_max) }} °{{ temperatureUnit }}
+      </span>
+    </div>
+    <!-- Clouds -->
+    <div class="extra-item clouds">
+      <span class="text clouds-text">Clouds</span>
+      <span class="figures clouds-figures"> {{ forecast.clouds?.all }} %</span>
+    </div>
+    <!-- Humidity -->
+    <div class="extra-item humidity">
+      <span class="text humidity-text">Humidity</span>
+      <span class="figures humidity-figures"> {{ forecast.main.humidity }} % </span>
+    </div>
+    <!-- Wind -->
+    <div class="extra-item wind">
+      <span class="text wind-text">Wind</span>
+      <span class="figures wind-figures"> {{ forecast.wind?.speed }} m/s</span>
+    </div>
+    <!-- Pressure -->
+    <div class="extra-item pressure">
+      <span class="text pressure-text">Pressure</span>
+      <span class="figures pressure-figures"> {{ forecast.main.pressure }} hPa</span>
+    </div>
+    <!-- Rain -->
+    <div class="extra-item rain">
+      <span class="text rain-text">Rain (3h)</span>
+      <span class="figures rain-figures"> {{ cityWeather.rain ? cityWeather.rain['3h'] : 0 }} mm</span>
+    </div>
+    <!-- Snow -->
+    <div class="extra-item snow">
+      <span class="text snow-text">Snow (3h)</span>
+      <span class="figures snow-figures"> {{ cityWeather.snow ? forecast.snow['3h'] : 0 }} mm</span>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,77 @@
+.top-buttons {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .go-home-button {
+    margin-right: auto;
+  }
+
+  .temperature-unit-btn {
+    margin: 0 0.2rem;
+  }
+
+  .temperature-unit-buttons,
+  .go-home-button {
+    margin: 0.4rem 0;
+  }
+}
+
+.city-title {
+  color: orangered;
+  font-size: 2rem;
+}
+
+.city-weather-display-title {
+  text-align: center;
+}
+
+.weather-summary {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+
+  .weather-summary--temperature {
+    font-size: 2rem;
+  }
+  .weather-summary--text {
+    font-size: 1.5rem;
+    display: block;
+  }
+  .weather-summary--datetime {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    .date {
+      font-size: 1.5rem;
+    }
+    .time {
+      opacity: 0.8;
+      font-size: 1rem;
+      // display: block;
+    }
+  }
+}
+
+.extras {
+  display: flex;
+
+  .extra-item {
+    display: inline-flex;
+    flex-direction: column;
+    margin: 1rem;
+
+    .text {
+      font-weight: 500;
+
+      &::after {
+        content: ':';
+      }
+    }
+    .figures {
+      margin-left: 0.5rem;
+    }
+  }
+}

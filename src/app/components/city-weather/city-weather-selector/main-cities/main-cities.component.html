@@ -1,0 +1,12 @@
+<section class="card-group main-cities" *ngIf="mainCities?.length > 0">
+  <ng-container *ngFor="let city of mainCities">
+    <!-- We can use (click)="onCityClick(city.id)" to trigger the navigation programmatically -->
+    <div class="card city-card" [routerLink]="['/weather', city.country, city.name]">
+      <div class="card-body city-card-image city-bg-image--{{ city.id }}">
+        <span class="card-title">
+          {{ city.name }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</section>
