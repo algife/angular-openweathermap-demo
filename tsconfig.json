@@ -12,9 +12,24 @@
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@core/*": ["src/app/core/*"],
+      "@components/*": ["src/app/components/*"],
+      "@environments/*": ["src/environments/*"],
+      "@guards/*": ["src/app/services/guards/*"],
+      "@models/*": ["src/app/models/*"],
+      "@modules/*": ["src/app/modules/*"],
+      "@routes/*": ["src/app/routes/*"],
+      "@routing/*": ["src/app/routes/*"],
+      "@services/*": ["src/app/services/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@app/*": ["src/app/*"]
+    }
   },
   "angularCompilerOptions": {
+    "preserveWhitespaces": false,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }
