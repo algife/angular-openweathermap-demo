@@ -72,7 +72,26 @@ export class WeatherService {
 
   // Case insensitive filtering
   public filterCities(query: string) {
-    const filtered = this.origCities; // ! Placeholder
+    const keywords = query
+      .replace('-', ',')
+      .replace(' ', ',')
+      .split(',')
+      .map(k => k.trim().toLocaleLowerCase())
+      .filter(Boolean); // Get only elements with content
+
+    const filtered = this.origCities.filter(city => {
+      const cityTags = [city.name, city.state, city.country].map(tag => tag.toLocaleLowerCase());
+      return keywords.every(
+        k =>
+          // Exact match
+          cityTags.includes(k) ||
+          // Matching name of the city / state partially written
+          cityTags
+            .filter(t => t.length > 2)
+            .toString()
+            .includes(k)
+      );
+    });
     this.filteredCities$.next(filtered);
   }
 }

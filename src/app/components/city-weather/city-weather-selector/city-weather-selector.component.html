@@ -1,0 +1,34 @@
+<div class="page-container">
+  <h2 class="title city-weather-selector-title">
+    Choose the city to see the Weather Forecast:
+  </h2>
+
+  <div class="city-list-total-count">Total cities: {{ totalCount }}</div>
+
+  <!-- Searchbox -->
+  <app-search-box></app-search-box>
+
+  <!-- City list -->
+  <ng-container *ngTemplateOutlet="cityList"></ng-container>
+</div>
+
+<!--
+  TEMPLATES
+-->
+
+<ng-template #cityList>
+  <section class="city-list" *ngIf="searchCityList?.length > 0">
+    <ng-container *ngFor="let city of searchCityList">
+      <!-- city item -->
+      <ng-template *ngTemplateOutlet="cityItem; context: { city: city }"></ng-template>
+    </ng-container>
+  </section>
+</ng-template>
+
+<ng-template #cityItem let-city="city">
+  <div class="card city-list-item" [routerLink]="['/weather', city.country, city.name]">
+    <div class="card-body">
+      <span>{{ getCityFullName(city.name, city.state, city.country) }}</span>
+    </div>
+  </div>
+</ng-template>
