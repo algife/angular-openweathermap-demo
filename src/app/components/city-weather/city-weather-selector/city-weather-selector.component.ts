@@ -41,8 +41,6 @@ export class CityWeatherSelectorComponent implements OnInit, OnDestroy {
   }
 
   private loadCities() {
-    this.weatherService.getCityWeathers();
-
     this.weatherService.filteredCities$.pipe(takeUntil(this.destroyed$)).subscribe((cities: ICityWeather[]) => {
       this.searchCityList = cities && cities.length > 0 ? cities.slice(this.pageCountInit, this.pageCountInit + itemsPerPage) : [];
     });
