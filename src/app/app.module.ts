@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,7 +12,16 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent, CityWeatherSelectorComponent, SearchBoxComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule, ErrorsModule, CityWeatherModule],
+  imports: [
+    //
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule,
+    ErrorsModule,
+    CityWeatherModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

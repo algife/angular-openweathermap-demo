@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ICityWeather } from '@models/store-state/slices/city-weather';
 import { WeatherService } from '@services/weather/weather.service';
 
