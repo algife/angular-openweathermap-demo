@@ -1,0 +1,33 @@
+@import '../../../../assets/styles/partials/variables';
+
+.city-list {
+  width: 100%;
+  text-align: center;
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  .card-body {
+    padding: 0.5rem;
+  }
+
+  .city-list-item {
+    margin: 0.5rem;
+    cursor: pointer;
+    background-color: $highlightColour;
+    flex: 1 0 auto;
+    flex-basis: 30%;
+    border: 1px solid #ccc;
+    height: 2.5rem;
+
+    &:hover {
+      filter: brightness(120%);
+      border-color: teal;
+    }
+  }
+}
+
+.city-list-total-count {
+  text-align: right;
+}
